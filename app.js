@@ -3,7 +3,7 @@ const PORT = 3000;
 const app = express();
 const mongoose = require('mongoose');
 const linkRoute = require("./routes/linkRoute")
-const Link = require("./models/Link")
+
 
 
 mongoose.connect('mongodb://localhost/links', {
