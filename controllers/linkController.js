@@ -54,7 +54,7 @@ const allLinks = async (req, res) => {
 
         let links = await Link.find({})
 
-        res.send(links);
+        res.render('all', {links});
 
     } catch (error) {
         res.send(error)
