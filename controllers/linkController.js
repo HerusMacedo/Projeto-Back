@@ -1,7 +1,9 @@
 
+const req = require("express/lib/request");
+const res = require("express/lib/response");
 const Link = require("../models/Link");
 
-const redirect = async (req, res) => {
+const redirect = async (req, res, next) => {
 
     let title = req.params.title;
 
@@ -11,7 +13,14 @@ const redirect = async (req, res) => {
 
         console.log(doc)
 
-        res.redirect(doc.url)
+        if (doc) {
+
+            res.redirect(doc.url);
+
+        } else {
+
+            next()
+        }
 
     } catch (error) {
 
@@ -31,10 +40,28 @@ const addLink = async (req, res) => {
         res.send("Link adicionado com sucesso");
 
     } catch (error) {
-        res.render("index", {error, body:req.body})
+        res.render("index", { error, body: req.body })
     }
 
 
 }
 
-module.exports = { redirect, addLink };
+const allLinks = async (req, res) => {
+
+
+
+    try {
+
+        let links = await Link.find({})
+
+        res.send(links);
+
+    } catch (error) {
+        res.send(error)
+
+
+    }
+
+}
+
+module.exports = { redirect, addLink, allLinks };
