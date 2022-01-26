@@ -31,10 +31,10 @@ const addLink = async (req, res) => {
         res.send("Link adicionado com sucesso");
 
     } catch (error) {
-res.send(error)
+        res.render("index", {error, body:req.body})
     }
 
 
 }
 
-module.exports = { redirect,addLink };
+module.exports = { redirect, addLink };
